@@ -21,7 +21,7 @@ const handleClickUpdate = () => {
 }
 
 const handleCellValueChanged = (event: any) => {
-  console.log('data changed=> ', event.data);
+  console.log('data changed=> ', event.data, event);
 }
 </script>
 
@@ -32,8 +32,9 @@ const handleCellValueChanged = (event: any) => {
       <a-input-number v-model="size.col" class="!w-24"><template #append>列</template></a-input-number>
       <span>类型</span>
       <a-select v-model="type" class="!w-27">
-        <a-option value="text">text</a-option>
-        <a-option value="boolean">boolean</a-option>
+        <a-option value="text" class="!w-27">text</a-option>
+        <a-option value="boolean" class="!w-27">boolean</a-option>
+        <a-option value="select" class="!w-27">select</a-option>
       </a-select>
       <a-button @click="handleClickUpdate" type="primary">更新</a-button>
     </a-space>

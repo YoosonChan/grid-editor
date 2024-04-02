@@ -1,11 +1,13 @@
-type CellDataType = 'text' | 'number' | 'date' | 'boolean'
+type CellDataType = 'text' | 'number' | 'date' | 'boolean' | 'select'
 
 export interface ColumnDefs {
   headerName: string
   field: string
   editable: boolean
   width: number
-  cellDataType: CellDataType
+  cellDataType?: CellDataType
+  cellEditor?: string
+  cellEditorParams?: any
 }
 
 
@@ -24,7 +26,11 @@ export class GridOptions {
   private generateColumnDefs = (type: CellDataType = 'text') => {
     let columnDefs: ColumnDefs[] = []
     for (let i = 0; i <= this.size.col; i++) {
-      columnDefs.push({ headerName: !!i ? `C${i}` : ``, field: `C${i}`, editable: !!i, width: 60, cellDataType: !!i ? type : 'text' })
+      if (type === 'select') {
+        columnDefs.push({ headerName: !!i ? `C${i}` : ``, field: `C${i}`, editable: !!i, width: 60, cellEditor: 'agSelectCellEditor', cellEditorParams: { values: ['', '打', '后'] } })
+      } else {
+        columnDefs.push({ headerName: !!i ? `C${i}` : ``, field: `C${i}`, editable: !!i, width: 60, cellDataType: !!i ? type : 'text' })
+      }
     }
     return columnDefs
   }
