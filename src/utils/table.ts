@@ -1,33 +1,37 @@
-type CellDataType = 'text' | 'number' | 'date' | 'boolean' | 'select'
+export type TableCellDataType = 'text' | 'number' | 'date' | 'checkbox' | 'dropdown' | 'select'
+
+export const SETTINGS = {
+  licenseKey: 'non-commercial-and-evaluation'
+}
 
 export interface ColumnDefs {
   headerName: string
   field: string
   editable: boolean
   width: number
-  cellDataType?: CellDataType
+  cellDataType?: TableCellDataType
   cellEditor?: string
   cellEditorParams?: any
 }
 
 
-interface GridSize {
+interface TableSize {
   row: number
   col: number
 }
 
-export class GridOptions {
-  constructor(size: GridSize, type: CellDataType = 'text') {
+export class TableOptions {
+  constructor(size: TableSize, type: TableCellDataType = 'text') {
     this.size = size
     this.type = type
   }
-  private size: GridSize
-  private type: CellDataType
-  private generateColumnDefs = (type: CellDataType = 'text') => {
+  private size: TableSize
+  private type: TableCellDataType
+  private generateColumnDefs = (type: TableCellDataType = 'text') => {
     let columnDefs: ColumnDefs[] = []
     for (let i = 0; i <= this.size.col; i++) {
       if (type === 'select') {
-        columnDefs.push({ headerName: !!i ? `C${i}` : ``, field: `C${i}`, editable: !!i, width: 60, cellEditor: 'agSelectCellEditor', cellEditorParams: { values: ['', '打', '后'] } })
+        columnDefs.push({ headerName: !!i ? `C${i}` : ``, field: `C${i}`, editable: !!i, width: 60, cellEditor: 'agSelectCellEditor', cellEditorParams: { values: ['', '🖨️', '🤖'] } })
       } else {
         columnDefs.push({ headerName: !!i ? `C${i}` : ``, field: `C${i}`, editable: !!i, width: 60, cellDataType: !!i ? type : 'text' })
       }

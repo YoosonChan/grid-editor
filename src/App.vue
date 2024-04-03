@@ -1,27 +1,25 @@
 <script setup lang="ts">
-import { AgGridVue } from 'ag-grid-vue3';
-import 'ag-grid-community/styles/ag-grid.css'
-import 'ag-grid-community/styles/ag-theme-quartz.css'
-import { reactive, ref, unref } from 'vue';
-import { ColumnDefs, GridOptions } from './utils/grid';
-
+import { reactive, ref } from 'vue';
+import { SETTINGS, TableCellDataType } from './utils/table';
+import { HotTable } from '@handsontable/vue3';
+import { registerAllModules } from 'handsontable/registry';
+import 'handsontable/dist/handsontable.full.css'
+// register Handsontable's modules
+registerAllModules()
+// basic configuratin
 const size = reactive({ row: 10, col: 10 })
-const type = ref<'text' | 'boolean'>('text')
+const type = ref<TableCellDataType>('text')
 
-const columnDefs = ref<ColumnDefs[]>()
-const rowData = ref()
+// table data
+const data = ref()
 
+// render method
 const renderGrid = () => {
-  const options = new GridOptions(unref(size), type.value).getOptions()
-  columnDefs.value = options.columnDefs
-  rowData.value = options.rowData
 }
+
+// event handler
 const handleClickUpdate = () => {
   renderGrid()
-}
-
-const handleCellValueChanged = (event: any) => {
-  console.log('data changed=> ', event.data, event);
 }
 </script>
 
@@ -33,16 +31,14 @@ const handleCellValueChanged = (event: any) => {
       <span>类型</span>
       <a-select v-model="type" class="!w-27">
         <a-option value="text" class="!w-27">text</a-option>
-        <a-option value="boolean" class="!w-27">boolean</a-option>
-        <a-option value="select" class="!w-27">select</a-option>
+        <a-option value="checkbox" class="!w-27">checkbox</a-option>
+        <a-option value="dropdown" class="!w-27">dropdown</a-option>
       </a-select>
       <a-button @click="handleClickUpdate" type="primary">更新</a-button>
     </a-space>
     <a-divider />
-    <div>
-      <ag-grid-vue :rowData="rowData" :columnDefs="columnDefs" @cell-value-changed="handleCellValueChanged"
-        style="height: 500px" class="ag-theme-quartz"></ag-grid-vue>
-    </div>
+    <hot-table :data="data" rowHeaders colHeaders :settings="SETTINGS"></hot-table>
     <a-divider />
   </div>
 </template>
+./utils/table

@@ -9,7 +9,8 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "ag-grid-vue3": "^31.2.0",
+    "@handsontable/vue3": "^14.2.0",
+    "handsontable": "^14.2.0",
     "vue": "^3.4.21"
   },
   "devDependencies": {
