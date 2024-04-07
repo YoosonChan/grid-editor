@@ -1,0 +1,14 @@
+{
+  "name": "we-server",
+  "author": "yoosonchan",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.mjs",
+  "scripts": {
+    "serve": "node index.mjs"
+  },
+  "dependencies": {
+    "fast-xml-parser": "^4.3.6",
+    "koa": "^2.15.2"
+  }
+}
