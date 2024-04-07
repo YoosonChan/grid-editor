@@ -1,0 +1,16 @@
+{
+  "name": "My Reader(Beta)",
+  "description": "A Reader for a special website",
+  "version": "1.0",
+  "manifest_version": 3,
+  "content_scripts": [
+    {
+      "js": [
+        "scripts/custom.js"
+      ],
+      "matches": [
+        "https://*/*"
+      ]
+    }
+  ]
+}
